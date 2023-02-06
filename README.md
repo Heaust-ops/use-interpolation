@@ -32,3 +32,9 @@ const initialPosition = [0,0,1];
 const duration = 2; // seconds
 const [position, setPosition, setDuration] = useInterpolation(initialPosition, duration, "ease-in-out", 144);
 ```
+
+![image](https://user-images.githubusercontent.com/54670936/217069616-3ae4e847-1bae-4204-bd8d-4cc42c5fd139.png)
+
+https://user-images.githubusercontent.com/54670936/217069230-7b889ab9-d4a2-46ce-956d-5a5462d7575e.mp4
+
+
