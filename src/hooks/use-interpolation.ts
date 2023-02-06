@@ -1,6 +1,18 @@
 import { useState, useEffect } from "react";
 
-const lerp = <T extends number | number[]>(
+type Tuple<T, N extends number> = N extends N
+  ? number extends N
+    ? T[]
+    : _TupleOf<T, N, []>
+  : never;
+
+type _TupleOf<T, N extends number, R extends unknown[]> = R["length"] extends N
+  ? R
+  : _TupleOf<T, N, [T, ...R]>;
+
+type Tensor = Array<number | Tensor>
+
+const lerp = <T extends number | Tensor>(
   from: T,
   to: T,
   fraction: number
@@ -23,7 +35,7 @@ const lerp = <T extends number | number[]>(
   return lerped;
 };
 
-const smoothstep = <T extends number | number[]>(
+const smoothstep = <T extends number | Tensor>(
   from: T,
   to: T,
   fraction: number
@@ -92,7 +104,7 @@ const smoothstep = <T extends number | number[]>(
  * @param fps the framerate, 60fps by default
  * @returns [ current state, state setter, duration setter, current target ]
  */
-export const useInterpolation = <T extends number | number[]>(
+export const useInterpolation = <T extends number | Tensor>(
   initialState: T,
   duration = 1.5,
   method: "lerp" | "ease-in-out" = "lerp",

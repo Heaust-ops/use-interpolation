@@ -2,10 +2,15 @@ import { useState } from "react";
 import styles from "./App.module.css";
 import { useInterpolation } from "./hooks/use-interpolation";
 
-function App() {
+const lr = () => Math.floor(Math.random() * 1000);
 
+const getRandomTensor = () => [lr(), [[lr()], lr(), lr()], [lr(), lr(), lr()]];
+
+function App() {
   /** normal use state */
   const [discreetState, setdiscreetState] = useState<number>(0);
+
+  const [rT, setrT] = useInterpolation(getRandomTensor());
 
   /** Interpolation with extra arguments */
   const [lerpedState, setlerpedState, _, target] = useInterpolation<number>(
@@ -25,6 +30,10 @@ function App() {
       }}
       className={`${styles.App}`}
     >
+      <h1 style={{ color: "white" }}>{JSON.stringify(rT)}</h1>
+      <button onClick={() => setrT(getRandomTensor())}>
+        Randomize
+      </button>
       <div
         style={{
           left: `clamp(calc(0vw  + 5rem), ${discreetState}rem, calc(100vw - 5rem))`,
