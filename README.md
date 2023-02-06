@@ -6,7 +6,12 @@ the tensor shape once initialized is fixed,
 when you set the value with this hook,
 it smoothly interpolates to the next value,
 
-Use this hook like so,
+Import the hook first,
+```
+import { useInterpolation } from "react-use-interpolation";
+```
+
+And then use it like so,
 
 ```
 const initialPosition = [0,0,1];
